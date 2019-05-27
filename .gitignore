@@ -1,39 +1,27 @@
-# maven ignore
-target/
+*.class
+.classpath
+.settings/
+*.log
+*.jar
+.project
 *.jar
 *.war
+*.ear
 *.zip
-*.tar
-*.tar.gz
+*.rar
 
-# eclipse ignore
-.settings/
-.project
-.classpath
-
-# idea ignore
-.idea/
-*.ipr
-*.iml
-*.iws
-
-# temp ignore
-*.log
-*.log.0
-*.cache
-*.diff
-*.patch
-*.tmp
 
 # system ignore
 .DS_Store
 Thumbs.db
 
-# else
-.springBeans
-*.out
-/.metadata/
-.recommenders
-*.log*
-logs/
-log/
+*.cache
+*.diff
+*.patch
+*.tmp
+
+src/main/webapp/WEB-INF/classes/
+src/main/webapp/WEB-INF/lib/
+src/main/webapp/WEB-INF/logs/
+
+target/
