@@ -228,10 +228,10 @@ public class FlowProcessController extends BaseController{
    * @return 页面
    * @throws Exception 异常
    */
-	 @PostMapping(value = "/api/FlowProcess/processDesigner")
+	 @GetMapping(value = "/api/FlowProcess/processDesigner")
   public RestAPIResult2 processDesigner(String id) throws Exception {
      String flowProcessJson ="";
-    if (id != null) {
+     if (StringUtil.isNotBlank(id)) {
         FlowProcess flowProcess = flowProcessService.getProcessById(id.toString());
       ProcessModel processModel = flowProcess.getModel();
       if (processModel != null) {
@@ -253,7 +253,7 @@ public class FlowProcessController extends BaseController{
       String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
       String flowContent = xml + FlowUtil.convertXml(flowContentStr);
       input = FileUtil.getStreamFromString(flowContent);
-      if (id != null) {
+      if (StringUtil.isNotBlank(id)) {
         flowProcessService.redeploy(id, flowContent);
       } else {
         flowProcessService.deploy(flowContent, this.getUserName(request));

@@ -417,7 +417,8 @@ public class FlowProcessServiceImpl  implements FlowProcessService{
   public Long getLatestProcessVersion(String flowName) throws Exception {
     Map<String, Object> map = new HashMap<>();
     map.put("flowName", flowName);
-    map.put("sortColumns", " id desc");
+    map.put("sortName", "id");
+    map.put("sortOrder", "desc");
 
     List list = this.selectByExample(new Query(map));
     if (list != null && list.size() > 0) {

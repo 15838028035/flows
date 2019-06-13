@@ -36,7 +36,7 @@
     <script src="scripts/jquery.cookie.js"></script>
     <script src="scripts/common.js"></script>
 
-		<link rel="stylesheet" href="${ctx}/scripts/flows/flow.css" type="text/css" />
+		<link rel="stylesheet" href="/scripts/flows/flow.css" type="text/css" />
 		<script src="/scripts/flows/raphael-min.js" type="text/javascript"></script>
 		<script src="/scripts/flows/dialog.js" type="text/javascript"></script>
 		<script src="/scripts/flows/CleverTabs/scripts/jquery.js" type="text/javascript"></script>
@@ -47,7 +47,23 @@
 		<script src="/scripts/flows/snaker.editors.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			$(function() {
-				var json="${flowProcessJson}";
+				var json="";
+				
+				$.ajax({
+                    type:'get',
+                    url:ctx+"/api/FlowProcess/processDesigner?id="+getUrlParam("id"),
+                    data:"",
+                    async: false,
+                    globle:false,
+                    error: function(){
+                        alert('数据处理错误!');
+                        return false;
+                    },
+                    success: function(data){
+                    	json = data.respData;
+                    }
+                });
+				
 				var model = "";
 				if(json) {
 					model=eval("(" + json + ")");
@@ -75,8 +91,8 @@
 	                if(result) {  
 	                	$.ajax({
 	    					type:'POST',
-	    					url:ctx+"/jsp/flows/flowProcessAction!processDeployXml.action",
-	    					data:"flowContentStr=" + data + "&id=${id}",
+	    					url:ctx+"/api/FlowProcess/processDeployXml",
+	    					data:"flowContentStr=" + data + "&id="+getUrlParam("id"),
 	    					async: false,
 	    					globle:false,
 	    					error: function(){
@@ -84,7 +100,7 @@
 	    						return false;
 	    					},
 	    					success: function(data){
-	    						if(data == 'true') {
+	    						if(data.respCode==1) {
 	    							bootbox.confirm('数据保存成功,您确认要返回流程定义页面吗?',function (result) {  
 	    				                if(result) {  
 	    				                	window.location.href = ctx+"/flowProcessList.html";
