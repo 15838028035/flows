@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.thinkit.cloud.flows.dao.FlowProcessMapper">
+    <resultMap id="flowProcessResult" type="com.thinkit.cloud.flows.bean.FlowProcess">
+   	  	<result property="id" column="id" jdbcType="BIGINT"   />
+   	  	<result property="flowNo" column="FLOW_NO" jdbcType="VARCHAR"   />
+   	  	<result property="flowVersion" column="FLOW_VERSION" jdbcType="BIGINT"   />
+   	  	<result property="flowName" column="FLOW_NAME" jdbcType="VARCHAR"   />
+   	  	<result property="displayName" column="DISPLAY_NAME" jdbcType="VARCHAR"   />
+   	  	<result property="flowType" column="FLOW_TYPE" jdbcType="VARCHAR"   />
+   	  	<result property="flowContent" column="FLOW_CONTENT" jdbcType="LONGVARBINARY"   />
+   	  	<result property="createUserId" column="create_user_id" jdbcType="BIGINT"   />
+   	  	<result property="createUserName" column="create_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"   />
+   	  	<result property="updateUserId" column="update_user_id" jdbcType="BIGINT"   />
+   	  	<result property="updateUserName" column="update_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"   />
+    </resultMap>
+
+	<sql id="Base_Column_List">
+	    <![CDATA[
+	   
+        	id ,
+        	FLOW_NO ,
+        	FLOW_VERSION ,
+        	FLOW_NAME ,
+        	DISPLAY_NAME ,
+        	FLOW_TYPE ,
+        	FLOW_CONTENT ,
+        	create_user_id ,
+        	create_user_name ,
+        	create_time ,
+        	update_user_id ,
+        	update_user_name ,
+        	update_time 
+	    ]]>
+	</sql>
+
+   <select id="selectByPrimaryKey" resultMap="flowProcessResult">
+	 select 
+	    <include refid="Base_Column_List"/>
+	    
+	        from flow_process 
+	        where 
+		       id = #{id,jdbcType=BIGINT}
+			
+</select>
+
+ <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+           delete from flow_process where
+        id = #{id,jdbcType=BIGINT}
+	
+       </delete>
+
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO flow_process (
+         id, FLOW_NO, FLOW_VERSION, FLOW_NAME, DISPLAY_NAME, FLOW_TYPE, FLOW_CONTENT, create_user_id, create_user_name, create_time, update_user_id, update_user_name, update_time
+        ) VALUES (
+         #{id,jdbcType=BIGINT}, #{flowNo,jdbcType=VARCHAR}, #{flowVersion,jdbcType=BIGINT}, #{flowName,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, #{flowType,jdbcType=VARCHAR}, #{flowContent,jdbcType=LONGVARBINARY}, #{createUserId,jdbcType=BIGINT}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateUserName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}        
+        )
+   
+</insert>
+
+ <insert id="insertSelective" parameterType="com.thinkit.cloud.flows.bean.FlowProcess">
+          INSERT INTO flow_process 
+	         <trim prefix="(" suffix=")" suffixOverrides="," >
+	    	<if test="id != null" >
+        		id,
+     	 	</if>
+	    	<if test="flowNo != null" >
+        		FLOW_NO,
+     	 	</if>
+	    	<if test="flowVersion != null" >
+        		FLOW_VERSION,
+     	 	</if>
+	    	<if test="flowName != null" >
+        		FLOW_NAME,
+     	 	</if>
+	    	<if test="displayName != null" >
+        		DISPLAY_NAME,
+     	 	</if>
+	    	<if test="flowType != null" >
+        		FLOW_TYPE,
+     	 	</if>
+	    	<if test="flowContent != null" >
+        		FLOW_CONTENT,
+     	 	</if>
+	    	<if test="createUserId != null" >
+        		create_user_id,
+     	 	</if>
+	    	<if test="createUserName != null" >
+        		create_user_name,
+     	 	</if>
+	    	<if test="createTime != null" >
+        		create_time,
+     	 	</if>
+	    	<if test="updateUserId != null" >
+        		update_user_id,
+     	 	</if>
+	    	<if test="updateUserName != null" >
+        		update_user_name,
+     	 	</if>
+	    	<if test="updateTime != null" >
+        		update_time,
+     	 	</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+
+	    		<if test="id != null" >
+        		     #{id,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="flowNo != null" >
+        		     #{flowNo,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="flowVersion != null" >
+        		     #{flowVersion,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="flowName != null" >
+        		     #{flowName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="displayName != null" >
+        		     #{displayName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="flowType != null" >
+        		     #{flowType,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="flowContent != null" >
+        		     #{flowContent,jdbcType=LONGVARBINARY},
+     	 		</if>
+	    		<if test="createUserId != null" >
+        		     #{createUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="createUserName != null" >
+        		     #{createUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="createTime != null" >
+        		     #{createTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="updateUserId != null" >
+        		     #{updateUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="updateUserName != null" >
+        		     #{updateUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="updateTime != null" >
+        		     #{updateTime,jdbcType=TIMESTAMP},
+     	 		</if>
+		</trim>
+ </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.thinkit.cloud.flows.bean.FlowProcess">
+    
+        UPDATE flow_process 
+     
+      <set >
+				<if test="flowNo != null and  flowNo != ''" >
+				FLOW_NO = #{flowNo,jdbcType=VARCHAR} ,
+				</if>
+				<if test="flowVersion != null ">
+				FLOW_VERSION = #{flowVersion,jdbcType=BIGINT} ,
+				</if>
+				<if test="flowName != null and  flowName != ''" >
+				FLOW_NAME = #{flowName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="displayName != null and  displayName != ''" >
+				DISPLAY_NAME = #{displayName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="flowType != null and  flowType != ''" >
+				FLOW_TYPE = #{flowType,jdbcType=VARCHAR} ,
+				</if>
+				<if test="flowContent != null ">
+				FLOW_CONTENT = #{flowContent,jdbcType=LONGVARBINARY} ,
+				</if>
+				<if test="createUserId != null ">
+				create_user_id = #{createUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="createUserName != null and  createUserName != ''" >
+				create_user_name = #{createUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="createTime != null ">
+				create_time = #{createTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="updateUserId != null ">
+				update_user_id = #{updateUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="updateUserName != null and  updateUserName != ''" >
+				update_user_name = #{updateUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="updateTime != null ">
+				update_time = #{updateTime,jdbcType=TIMESTAMP} ,
+				</if>
+
+	 </set>
+        WHERE 
+	        id = #{id,jdbcType=BIGINT}
+		
+    </update>
+   
+    <update id="updateByPrimaryKey" >
+
+        UPDATE flow_process SET
+	        FLOW_NO = #{flowNo} , FLOW_VERSION = #{flowVersion} , FLOW_NAME = #{flowName} , DISPLAY_NAME = #{displayName} , FLOW_TYPE = #{flowType} , FLOW_CONTENT = #{flowContent} , create_user_id = #{createUserId} , create_user_name = #{createUserName} , create_time = #{createTime} , update_user_id = #{updateUserId} , update_user_name = #{updateUserName} , update_time = #{updateTime}  
+        WHERE 
+		id = #{id,jdbcType=BIGINT}
+		 
+  
+</update>
+    
+    <select id="select" resultMap="flowProcessResult">
+	 select 
+    	<include refid="Base_Column_List"/>
+	   
+	        from flow_process WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="flowNo != null and  flowNo != ''" >
+				and   FLOW_NO like concat('%', #{flowNo,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowVersion != null ">
+			and   FLOW_VERSION = #{flowVersion,jdbcType=BIGINT}
+			</if>
+			<if test="flowName != null and  flowName != ''" >
+				and   FLOW_NAME like concat('%', #{flowName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="displayName != null and  displayName != ''" >
+				and   DISPLAY_NAME like concat('%', #{displayName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowType != null and  flowType != ''" >
+				and   FLOW_TYPE like concat('%', #{flowType,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowContent != null ">
+			and   FLOW_CONTENT = #{flowContent,jdbcType=LONGVARBINARY}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+    </select>
+      
+<select id="selectByExample" resultMap="flowProcessResult" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_process WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="flowNo != null and  flowNo != ''" >
+				and   FLOW_NO like concat('%', #{flowNo,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowVersion != null ">
+			and   FLOW_VERSION = #{flowVersion,jdbcType=BIGINT}
+			</if>
+			<if test="flowName != null and  flowName != ''" >
+				and   FLOW_NAME like concat('%', #{flowName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="displayName != null and  displayName != ''" >
+				and   DISPLAY_NAME like concat('%', #{displayName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowType != null and  flowType != ''" >
+				and   FLOW_TYPE like concat('%', #{flowType,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowContent != null ">
+			and   FLOW_CONTENT = #{flowContent,jdbcType=LONGVARBINARY}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+					
+  </select>
+
+<select id="selectByPageExample" resultType="java.util.HashMap" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_process WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="flowNo != null and  flowNo != ''" >
+				and   FLOW_NO like concat('%', #{flowNo,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowVersion != null ">
+			and   FLOW_VERSION = #{flowVersion,jdbcType=BIGINT}
+			</if>
+			<if test="flowName != null and  flowName != ''" >
+				and   FLOW_NAME like concat('%', #{flowName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="displayName != null and  displayName != ''" >
+				and   DISPLAY_NAME like concat('%', #{displayName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowType != null and  flowType != ''" >
+				and   FLOW_TYPE like concat('%', #{flowType,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="flowContent != null ">
+			and   FLOW_CONTENT = #{flowContent,jdbcType=LONGVARBINARY}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+		<if test="sortName!= null and  sortName != ''" >
+			order by ${sortName}  ${sortOrder}
+		</if>
+			
+  </select>
+
+</mapper>

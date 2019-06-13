@@ -1,10 +1,6 @@
 package com.thinkit.cloud.flows.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import com.thinkit.cloud.flows.util.JwtUtil;
 
 /**
  * 
@@ -14,13 +10,15 @@ import com.thinkit.cloud.flows.util.JwtUtil;
 public class BaseController {
 
 	public Long getLoginId(HttpServletRequest request) {
-		Map<String, Object> map = JwtUtil.validateTokenAndGetClaims(request);
-		return Long.valueOf((String) map.get("USER_ID"));
+	/*	Map<String, Object> map = JwtUtil.validateTokenAndGetClaims(request);
+		return Long.valueOf((String) map.get("USER_ID"));*/
+	    return 1L;
 	}
 
 	public String getUserName(HttpServletRequest request) {
-		Map<String, Object> map = JwtUtil.validateTokenAndGetClaims(request);
-		return (String) map.get("USER_NAME");
+		/*Map<String, Object> map = JwtUtil.validateTokenAndGetClaims(request);
+		return (String) map.get("USER_NAME");*/
+	    return "admin";
 	}
 
 	/**

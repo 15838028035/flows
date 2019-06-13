@@ -32,7 +32,7 @@ import com.thinkit.cloud.flows.filter.JwtAuthenticationFilter;
 @SpringBootApplication
 @RestController
 @EnableCaching
-public class UpmApplication {
+public class FlowsApplication {
 	
 	/**
 	 * 上传文件最大值
@@ -114,6 +114,6 @@ public class UpmApplication {
 	  }
 	
     public static void main(String[] args) {
-        SpringApplication.run(UpmApplication.class, args);
+        SpringApplication.run(FlowsApplication.class, args);
     }
 }

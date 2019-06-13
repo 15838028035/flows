@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>用户权限管理系统</title>
+    <title>流程管理系统</title>
 
 
     <meta charset="utf-8"/>
@@ -155,7 +155,7 @@
     <div >
         <div class="col-md-offset-3 col-md-6 ">
             <form class="form-horizontal" method="post" name="loginForm" id="loginForm">
-                <span class="heading">用户权限管理系统</span>
+                <span class="heading">流程配置管理系统</span>
 
                 <div class="form-group">
                     <span class="userIcon"></span>
@@ -231,8 +231,8 @@ var loginAjax = {
 	                              expire.setTime(expire.getTime() + (24*60*60 * 1000));
 	    
 	                              $.cookie('bearcktkaeskey', data.token, { expires: expire, path: '/' });
-	                              $.cookie('userName', data.respData.userName, { expires: expire, path: '/' });
-	                              $.cookie('userId', data.respData.id, { expires: expire, path: '/' });
+	                              $.cookie('userName', "admin", { expires: expire, path: '/' });
+	                              $.cookie('userId', "1", { expires: expire, path: '/' });
 	                              
 	                              window.location.href=ctx+"/index.html";
 	                          }

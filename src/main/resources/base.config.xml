@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+	<bean name="start" class="com.thinkit.cloud.flows.parser.impl.StartParser"/>
+	<bean name="task" class="com.thinkit.cloud.flows.parser.impl.ExtTaskParser"/>
+	<bean name="custom" class="com.thinkit.cloud.flows.parser.impl.CustomParser"/>
+	<bean name="decision" class="com.thinkit.cloud.flows.parser.impl.DecisionParser"/>
+	<bean name="subprocess" class="com.thinkit.cloud.flows.parser.impl.SubProcessParser"/>
+	<bean name="fork" class="com.thinkit.cloud.flows.parser.impl.ForkParser"/>
+	<bean name="join" class="com.thinkit.cloud.flows.parser.impl.JoinParser"/>
+	<bean name="end" class="com.thinkit.cloud.flows.parser.impl.EndParser"/>
+</config>

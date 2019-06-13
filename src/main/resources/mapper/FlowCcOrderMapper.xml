@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.thinkit.cloud.flows.dao.FlowCcOrderMapper">
+    <resultMap id="flowCcOrderResult" type="com.thinkit.cloud.flows.bean.FlowCcOrder">
+   	  	<result property="id" column="id" jdbcType="BIGINT"   />
+   	  	<result property="orderId" column="order_id" jdbcType="BIGINT"   />
+   	  	<result property="actorId" column="actor_id" jdbcType="BIGINT"   />
+   	  	<result property="creator" column="creator" jdbcType="VARCHAR"   />
+   	  	<result property="finishTime" column="finish_Time" jdbcType="TIMESTAMP"   />
+   	  	<result property="flowProcessId" column="FLOW_PROCESS_ID" jdbcType="BIGINT"   />
+   	  	<result property="createUserId" column="create_user_id" jdbcType="BIGINT"   />
+   	  	<result property="createUserName" column="create_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"   />
+   	  	<result property="updateUserId" column="update_user_id" jdbcType="BIGINT"   />
+   	  	<result property="updateUserName" column="update_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"   />
+    </resultMap>
+
+	<sql id="Base_Column_List">
+	    <![CDATA[
+	   
+        	id ,
+        	order_id ,
+        	actor_id ,
+        	creator ,
+        	finish_Time ,
+        	FLOW_PROCESS_ID ,
+        	create_user_id ,
+        	create_user_name ,
+        	create_time ,
+        	update_user_id ,
+        	update_user_name ,
+        	update_time 
+	    ]]>
+	</sql>
+
+   <select id="selectByPrimaryKey" resultMap="flowCcOrderResult">
+	 select 
+	    <include refid="Base_Column_List"/>
+	    
+	        from flow_cc_order 
+	        where 
+		       id = #{id,jdbcType=BIGINT}
+			
+</select>
+
+ <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+           delete from flow_cc_order where
+        id = #{id,jdbcType=BIGINT}
+	
+       </delete>
+
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO flow_cc_order (
+         id, order_id, actor_id, creator, finish_Time, FLOW_PROCESS_ID, create_user_id, create_user_name, create_time, update_user_id, update_user_name, update_time
+        ) VALUES (
+         #{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{actorId,jdbcType=BIGINT}, #{creator,jdbcType=VARCHAR}, #{finishTime,jdbcType=TIMESTAMP}, #{flowProcessId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateUserName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}        
+        )
+   
+</insert>
+
+ <insert id="insertSelective" parameterType="com.thinkit.cloud.flows.bean.FlowCcOrder">
+          INSERT INTO flow_cc_order 
+	         <trim prefix="(" suffix=")" suffixOverrides="," >
+	    	<if test="id != null" >
+        		id,
+     	 	</if>
+	    	<if test="orderId != null" >
+        		order_id,
+     	 	</if>
+	    	<if test="actorId != null" >
+        		actor_id,
+     	 	</if>
+	    	<if test="creator != null" >
+        		creator,
+     	 	</if>
+	    	<if test="finishTime != null" >
+        		finish_Time,
+     	 	</if>
+	    	<if test="flowProcessId != null" >
+        		FLOW_PROCESS_ID,
+     	 	</if>
+	    	<if test="createUserId != null" >
+        		create_user_id,
+     	 	</if>
+	    	<if test="createUserName != null" >
+        		create_user_name,
+     	 	</if>
+	    	<if test="createTime != null" >
+        		create_time,
+     	 	</if>
+	    	<if test="updateUserId != null" >
+        		update_user_id,
+     	 	</if>
+	    	<if test="updateUserName != null" >
+        		update_user_name,
+     	 	</if>
+	    	<if test="updateTime != null" >
+        		update_time,
+     	 	</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+
+	    		<if test="id != null" >
+        		     #{id,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="orderId != null" >
+        		     #{orderId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="actorId != null" >
+        		     #{actorId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="creator != null" >
+        		     #{creator,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="finishTime != null" >
+        		     #{finishTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="flowProcessId != null" >
+        		     #{flowProcessId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="createUserId != null" >
+        		     #{createUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="createUserName != null" >
+        		     #{createUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="createTime != null" >
+        		     #{createTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="updateUserId != null" >
+        		     #{updateUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="updateUserName != null" >
+        		     #{updateUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="updateTime != null" >
+        		     #{updateTime,jdbcType=TIMESTAMP},
+     	 		</if>
+		</trim>
+ </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.thinkit.cloud.flows.bean.FlowCcOrder">
+    
+        UPDATE flow_cc_order 
+     
+      <set >
+				<if test="orderId != null ">
+				order_id = #{orderId,jdbcType=BIGINT} ,
+				</if>
+				<if test="actorId != null ">
+				actor_id = #{actorId,jdbcType=BIGINT} ,
+				</if>
+				<if test="creator != null and  creator != ''" >
+				creator = #{creator,jdbcType=VARCHAR} ,
+				</if>
+				<if test="finishTime != null ">
+				finish_Time = #{finishTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="flowProcessId != null ">
+				FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT} ,
+				</if>
+				<if test="createUserId != null ">
+				create_user_id = #{createUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="createUserName != null and  createUserName != ''" >
+				create_user_name = #{createUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="createTime != null ">
+				create_time = #{createTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="updateUserId != null ">
+				update_user_id = #{updateUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="updateUserName != null and  updateUserName != ''" >
+				update_user_name = #{updateUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="updateTime != null ">
+				update_time = #{updateTime,jdbcType=TIMESTAMP} ,
+				</if>
+
+	 </set>
+        WHERE 
+	        id = #{id,jdbcType=BIGINT}
+		
+    </update>
+   
+    <update id="updateByPrimaryKey" >
+
+        UPDATE flow_cc_order SET
+	        order_id = #{orderId} , actor_id = #{actorId} , creator = #{creator} , finish_Time = #{finishTime} , FLOW_PROCESS_ID = #{flowProcessId} , create_user_id = #{createUserId} , create_user_name = #{createUserName} , create_time = #{createTime} , update_user_id = #{updateUserId} , update_user_name = #{updateUserName} , update_time = #{updateTime}  
+        WHERE 
+		id = #{id,jdbcType=BIGINT}
+		 
+  
+</update>
+    
+    <select id="select" resultMap="flowCcOrderResult">
+	 select 
+    	<include refid="Base_Column_List"/>
+	   
+	        from flow_cc_order WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="orderId != null ">
+			and   order_id = #{orderId,jdbcType=BIGINT}
+			</if>
+			<if test="actorId != null ">
+			and   actor_id = #{actorId,jdbcType=BIGINT}
+			</if>
+			<if test="creator != null and  creator != ''" >
+				and   creator like concat('%', #{creator,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="finishTime != null ">
+			and   finish_Time = #{finishTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="flowProcessId != null ">
+			and   FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+    </select>
+      
+<select id="selectByExample" resultMap="flowCcOrderResult" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_cc_order WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="orderId != null ">
+			and   order_id = #{orderId,jdbcType=BIGINT}
+			</if>
+			<if test="actorId != null ">
+			and   actor_id = #{actorId,jdbcType=BIGINT}
+			</if>
+			<if test="creator != null and  creator != ''" >
+				and   creator like concat('%', #{creator,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="finishTime != null ">
+			and   finish_Time = #{finishTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="flowProcessId != null ">
+			and   FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+					
+  </select>
+
+<select id="selectByPageExample" resultType="java.util.HashMap" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_cc_order WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="orderId != null ">
+			and   order_id = #{orderId,jdbcType=BIGINT}
+			</if>
+			<if test="actorId != null ">
+			and   actor_id = #{actorId,jdbcType=BIGINT}
+			</if>
+			<if test="creator != null and  creator != ''" >
+				and   creator like concat('%', #{creator,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="finishTime != null ">
+			and   finish_Time = #{finishTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="flowProcessId != null ">
+			and   FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+		<if test="sortName!= null and  sortName != ''" >
+			order by ${sortName}  ${sortOrder}
+		</if>
+			
+  </select>
+
+</mapper>

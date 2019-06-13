@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>流程实例历史表新增、编辑</title>
+   <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--css样式-->
+    <link href="scripts/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="scripts/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+    <!--js-->
+
+    <script src="scripts/jquery/jquery-3.2.0.min.js"></script>
+    <script src="scripts/bootstrap/js/bootstrap.js"></script>
+
+    <script src="scripts/bootbox/bootbox.min.js"></script>
+
+    <script src="scripts/bootstrap-datetimepicker/js/moment.js"></script>
+    <script src="scripts/bootstrap-datetimepicker/js/moment_zh-CN.js"></script>
+    <link href="scripts/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <script src="scripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="scripts/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <link href="scripts/bootstrapvalidator/css/bootstrapValidator.css" rel="stylesheet">
+    <script src="scripts/bootstrapvalidator/js/bootstrapValidator.js"></script>
+    <script src="scripts/bootstrapvalidator/js/language/zh_CN.js"></script>
+
+    <link href="scripts/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+    <script src="scripts/bootstrap-fileinput/js/fileinput.js"></script>
+
+    <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/common.js"></script>
+	
+</head>
+<body>
+<div class="container">
+	<form  class="form-horizontal" method="post" name="flowOrderHistForm" id="flowOrderHistForm">
+	<input type="hidden" name="id" id="id" />
+	<input type="hidden" name="operate" id="operate"  />
+           
+      		<div class="form-group">
+			 <label for="orderNo">流程编号</label>
+		 	     <input class="form-control" type="text"  name="orderNo" id="orderNo"  />
+		 	</div>
+      		<div class="form-group">
+			 <label for="orderVersion">流程版本</label>
+		 	     <input class="form-control" type="text"  name="orderVersion" id="orderVersion"  />
+		 	</div>
+      		<div class="form-group">
+			 <label for="flowProcessId">流程定义ID</label>
+		 	     <input class="form-control" type="text"  name="flowProcessId" id="flowProcessId"  />
+		 	</div>
+      		<div class="form-group">
+			 <label for="parentId">父流程实例ID</label>
+		 	     <input class="form-control" type="text"  name="parentId" id="parentId"  />
+		 	</div>
+      		<div class="form-group">
+			 <label for="parentNodeName">父流程名称</label>
+		 	     <input class="form-control" type="text"  name="parentNodeName" id="parentNodeName"  />
+		 	</div>
+      		<div class="form-group">
+			 <label for="expireTime">流程实例期望完成时间</label>
+				<input class="form-control" type="text" name="expireTime" id = "expireTime"  class="datetimepicker"  readonly="readonly"/>
+		 	</div>
+      		<div class="form-group">
+			 <label for="priority">流程实例优先级</label>
+		 	     <input class="form-control" type="text"  name="priority" id="priority"  />
+		 	</div>
+      		<div class="form-group">
+			 <label for="variable">流程实例附属变量</label>
+		 	     <input class="form-control" type="text"  name="variable" id="variable"  />
+		 	</div>
+      		<div class="form-group">
+			 <label for="orderState">流程实例状态（0：结束；1：活动）</label>
+		 	     <input class="form-control" type="text"  name="orderState" id="orderState"  />
+		 	</div>
+       
+ 	  <div class="form-group"> 
+                 <button id="save"  class="btn btn-default">保存</button>
+                <button type="button" id="backToHomeButton"  class="btn btn-default">返回</button>
+        </div>	
+       
+    	</form>
+</div>
+<script>
+		 //拦截器判断
+     var token = $.cookie('bearcktkaeskey');
+    if (token == ""||token==undefined) {
+        location.href = ctx + '/login.html';
+    }
+
+    //加载
+    var loadInfo = {
+        init: function () {
+            this.load_Info();
+        },
+        load_Info:function(){
+            //截取参数
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+
+            var id = $.getUrlParam('id');
+            var operate = $.getUrlParam('operate');
+            
+            if(id != null){
+                $("#id").val(id);
+                $.ajax({
+                    url: ctx+"/api/FlowOrderHist/"+id+"?TOKEN="+token,
+                    type: "get",
+                    dataType: "json",
+                    success: function(data){
+                            $("#orderNo").val(data.orderNo);
+                            $("#orderVersion").val(data.orderVersion);
+                            $("#flowProcessId").val(data.flowProcessId);
+                            $("#parentId").val(data.parentId);
+                            $("#parentNodeName").val(data.parentNodeName);
+                            $("#expireTime").val(data.expireTime);
+                            $("#priority").val(data.priority);
+                            $("#variable").val(data.variable);
+                            $("#orderState").val(data.orderState);
+                    },
+                    error: function(data){
+                        bootbox.alert("异常");
+                        return false;
+                    }
+                });
+            }
+        }
+    };//end loadInfo
+    
+    //校验
+     var bootstrapValidator = {
+        init: function () {
+            this.doBootstrapValidator();
+        },
+        doBootstrapValidator:function(){
+              $("#flowOrderHistForm").bootstrapValidator({
+            
+            fields: {
+                 "orderNo": {
+                    message: '流程编号不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '流程编号不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "orderVersion": {
+                    message: '流程版本不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '流程版本不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "flowProcessId": {
+                    message: '流程定义ID不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '流程定义ID不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "parentId": {
+                    message: '父流程实例ID不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '父流程实例ID不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "parentNodeName": {
+                    message: '父流程名称不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '父流程名称不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "expireTime": {
+                    message: '流程实例期望完成时间不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '流程实例期望完成时间不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "priority": {
+                    message: '流程实例优先级不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '流程实例优先级不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "variable": {
+                    message: '流程实例附属变量不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '流程实例附属变量不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+                 "orderState": {
+                    message: '流程实例状态（0：结束；1：活动）不能为空',
+                    validators: {  
+                                     notEmpty: {  
+                                        message: '流程实例状态（0：结束；1：活动）不能为空'  
+                                    } 
+                                    
+                                }  
+                
+               },
+            }
+        }
+        );
+        
+        }
+    };//end bootstrapValidator
+    
+    //保存或更新
+    var saveOrUpdate = {
+        init: function () {
+            this.doSaveOrUpdate();
+        },
+        doSaveOrUpdate:function(){
+        
+          //截取参数
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+
+            var id = $.getUrlParam('id');
+            
+         $("#save").click(function () {//非submit按钮点击后进行验证，如果是submit则无需此句直接验证
+                $("#flowOrderHistForm").bootstrapValidator('validate');//提交验证
+                if ($("#flowOrderHistForm").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+                    var type = "post";
+                    var url = ctx + "/api/FlowOrderHist?TOKEN="+token;
+                    var operate = $.getUrlParam('operate');
+                    if (operate == "edit"){
+                        type = "put";
+                        url = ctx + "/api/FlowOrderHist/"+id+"?TOKEN="+token;
+                    }else {
+                        $("#id").val(0);
+                    }
+                    
+                    var data = $('#flowOrderHistForm').serialize();
+                    $.ajax({
+                        url: url,
+                        data:data,
+                        type: type,
+                        dataType: "json",
+                        success: function (data) {
+                            bootbox.alert(data.respMsg);
+                        },
+                        error: function (data) {
+                            bootbox.alert("异常");
+                            return false;
+                        }
+                    });
+                }
+
+            });
+        
+        }
+    };//end saveOrUpdate
+    
+    //返回
+     var backToHome = {
+        init: function () {
+            this.doBackToHome();
+        },
+        doBackToHome:function(){
+            $("#backToHomeButton").click(function () {
+                window.history.go(-1);
+            });
+        }
+    };//end backToHomeButton
+        
+    //初始化加载    
+    $(function () {
+        loadInfo.init();
+        bootstrapValidator.init();
+        saveOrUpdate.init();
+        backToHome.init();
+    });
+    
+</script>
+</body>
+</html>

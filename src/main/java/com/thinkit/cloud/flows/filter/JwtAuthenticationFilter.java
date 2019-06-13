@@ -44,7 +44,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     		return false;
     	}
     	
-        return pathMatcher.match("/api/**", request.getServletPath());
+      //  return pathMatcher.match("/api/**", request.getServletPath());
+    	return false;
     }
 
 }

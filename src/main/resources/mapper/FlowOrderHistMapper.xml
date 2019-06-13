@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.thinkit.cloud.flows.dao.FlowOrderHistMapper">
+    <resultMap id="flowOrderHistResult" type="com.thinkit.cloud.flows.bean.FlowOrderHist">
+   	  	<result property="id" column="id" jdbcType="BIGINT"   />
+   	  	<result property="orderNo" column="ORDER_NO" jdbcType="VARCHAR"   />
+   	  	<result property="orderVersion" column="ORDER_VERSION" jdbcType="BIGINT"   />
+   	  	<result property="flowProcessId" column="FLOW_PROCESS_ID" jdbcType="BIGINT"   />
+   	  	<result property="parentId" column="PARENT_ID" jdbcType="BIGINT"   />
+   	  	<result property="parentNodeName" column="parent_Node_Name" jdbcType="VARCHAR"   />
+   	  	<result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"   />
+   	  	<result property="priority" column="priority" jdbcType="BIGINT"   />
+   	  	<result property="variable" column="variable" jdbcType="VARCHAR"   />
+   	  	<result property="orderState" column="order_state" jdbcType="BIGINT"   />
+   	  	<result property="endTime" column="end_time" jdbcType="TIMESTAMP"   />
+   	  	<result property="createUserId" column="create_user_id" jdbcType="BIGINT"   />
+   	  	<result property="createUserName" column="create_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"   />
+   	  	<result property="updateUserId" column="update_user_id" jdbcType="BIGINT"   />
+   	  	<result property="updateUserName" column="update_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"   />
+    </resultMap>
+
+	<sql id="Base_Column_List">
+	    <![CDATA[
+	   
+        	id ,
+        	ORDER_NO ,
+        	ORDER_VERSION ,
+        	FLOW_PROCESS_ID ,
+        	PARENT_ID ,
+        	parent_Node_Name ,
+        	expire_time ,
+        	priority ,
+        	variable ,
+        	order_state ,
+        	end_time ,
+        	create_user_id ,
+        	create_user_name ,
+        	create_time ,
+        	update_user_id ,
+        	update_user_name ,
+        	update_time 
+	    ]]>
+	</sql>
+
+   <select id="selectByPrimaryKey" resultMap="flowOrderHistResult">
+	 select 
+	    <include refid="Base_Column_List"/>
+	    
+	        from flow_order_hist 
+	        where 
+		       id = #{id,jdbcType=BIGINT}
+			
+</select>
+
+ <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+           delete from flow_order_hist where
+        id = #{id,jdbcType=BIGINT}
+	
+       </delete>
+
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO flow_order_hist (
+         id, ORDER_NO, ORDER_VERSION, FLOW_PROCESS_ID, PARENT_ID, parent_Node_Name, expire_time, priority, variable, order_state, end_time, create_user_id, create_user_name, create_time, update_user_id, update_user_name, update_time
+        ) VALUES (
+         #{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{orderVersion,jdbcType=BIGINT}, #{flowProcessId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{parentNodeName,jdbcType=VARCHAR}, #{expireTime,jdbcType=TIMESTAMP}, #{priority,jdbcType=BIGINT}, #{variable,jdbcType=VARCHAR}, #{orderState,jdbcType=BIGINT}, #{endTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateUserName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}        
+        )
+   
+</insert>
+
+ <insert id="insertSelective" parameterType="com.thinkit.cloud.flows.bean.FlowOrderHist">
+          INSERT INTO flow_order_hist 
+	         <trim prefix="(" suffix=")" suffixOverrides="," >
+	    	<if test="id != null" >
+        		id,
+     	 	</if>
+	    	<if test="orderNo != null" >
+        		ORDER_NO,
+     	 	</if>
+	    	<if test="orderVersion != null" >
+        		ORDER_VERSION,
+     	 	</if>
+	    	<if test="flowProcessId != null" >
+        		FLOW_PROCESS_ID,
+     	 	</if>
+	    	<if test="parentId != null" >
+        		PARENT_ID,
+     	 	</if>
+	    	<if test="parentNodeName != null" >
+        		parent_Node_Name,
+     	 	</if>
+	    	<if test="expireTime != null" >
+        		expire_time,
+     	 	</if>
+	    	<if test="priority != null" >
+        		priority,
+     	 	</if>
+	    	<if test="variable != null" >
+        		variable,
+     	 	</if>
+	    	<if test="orderState != null" >
+        		order_state,
+     	 	</if>
+	    	<if test="endTime != null" >
+        		end_time,
+     	 	</if>
+	    	<if test="createUserId != null" >
+        		create_user_id,
+     	 	</if>
+	    	<if test="createUserName != null" >
+        		create_user_name,
+     	 	</if>
+	    	<if test="createTime != null" >
+        		create_time,
+     	 	</if>
+	    	<if test="updateUserId != null" >
+        		update_user_id,
+     	 	</if>
+	    	<if test="updateUserName != null" >
+        		update_user_name,
+     	 	</if>
+	    	<if test="updateTime != null" >
+        		update_time,
+     	 	</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+
+	    		<if test="id != null" >
+        		     #{id,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="orderNo != null" >
+        		     #{orderNo,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="orderVersion != null" >
+        		     #{orderVersion,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="flowProcessId != null" >
+        		     #{flowProcessId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="parentId != null" >
+        		     #{parentId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="parentNodeName != null" >
+        		     #{parentNodeName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="expireTime != null" >
+        		     #{expireTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="priority != null" >
+        		     #{priority,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="variable != null" >
+        		     #{variable,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="orderState != null" >
+        		     #{orderState,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="endTime != null" >
+        		     #{endTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="createUserId != null" >
+        		     #{createUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="createUserName != null" >
+        		     #{createUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="createTime != null" >
+        		     #{createTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="updateUserId != null" >
+        		     #{updateUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="updateUserName != null" >
+        		     #{updateUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="updateTime != null" >
+        		     #{updateTime,jdbcType=TIMESTAMP},
+     	 		</if>
+		</trim>
+ </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.thinkit.cloud.flows.bean.FlowOrderHist">
+    
+        UPDATE flow_order_hist 
+     
+      <set >
+				<if test="orderNo != null and  orderNo != ''" >
+				ORDER_NO = #{orderNo,jdbcType=VARCHAR} ,
+				</if>
+				<if test="orderVersion != null ">
+				ORDER_VERSION = #{orderVersion,jdbcType=BIGINT} ,
+				</if>
+				<if test="flowProcessId != null ">
+				FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT} ,
+				</if>
+				<if test="parentId != null ">
+				PARENT_ID = #{parentId,jdbcType=BIGINT} ,
+				</if>
+				<if test="parentNodeName != null and  parentNodeName != ''" >
+				parent_Node_Name = #{parentNodeName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="expireTime != null ">
+				expire_time = #{expireTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="priority != null ">
+				priority = #{priority,jdbcType=BIGINT} ,
+				</if>
+				<if test="variable != null and  variable != ''" >
+				variable = #{variable,jdbcType=VARCHAR} ,
+				</if>
+				<if test="orderState != null ">
+				order_state = #{orderState,jdbcType=BIGINT} ,
+				</if>
+				<if test="endTime != null ">
+				end_time = #{endTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="createUserId != null ">
+				create_user_id = #{createUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="createUserName != null and  createUserName != ''" >
+				create_user_name = #{createUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="createTime != null ">
+				create_time = #{createTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="updateUserId != null ">
+				update_user_id = #{updateUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="updateUserName != null and  updateUserName != ''" >
+				update_user_name = #{updateUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="updateTime != null ">
+				update_time = #{updateTime,jdbcType=TIMESTAMP} ,
+				</if>
+
+	 </set>
+        WHERE 
+	        id = #{id,jdbcType=BIGINT}
+		
+    </update>
+   
+    <update id="updateByPrimaryKey" >
+
+        UPDATE flow_order_hist SET
+	        ORDER_NO = #{orderNo} , ORDER_VERSION = #{orderVersion} , FLOW_PROCESS_ID = #{flowProcessId} , PARENT_ID = #{parentId} , parent_Node_Name = #{parentNodeName} , expire_time = #{expireTime} , priority = #{priority} , variable = #{variable} , order_state = #{orderState} , end_time = #{endTime} , create_user_id = #{createUserId} , create_user_name = #{createUserName} , create_time = #{createTime} , update_user_id = #{updateUserId} , update_user_name = #{updateUserName} , update_time = #{updateTime}  
+        WHERE 
+		id = #{id,jdbcType=BIGINT}
+		 
+  
+</update>
+    
+    <select id="select" resultMap="flowOrderHistResult">
+	 select 
+    	<include refid="Base_Column_List"/>
+	   
+	        from flow_order_hist WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="orderNo != null and  orderNo != ''" >
+				and   ORDER_NO like concat('%', #{orderNo,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="orderVersion != null ">
+			and   ORDER_VERSION = #{orderVersion,jdbcType=BIGINT}
+			</if>
+			<if test="flowProcessId != null ">
+			and   FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT}
+			</if>
+			<if test="parentId != null ">
+			and   PARENT_ID = #{parentId,jdbcType=BIGINT}
+			</if>
+			<if test="parentNodeName != null and  parentNodeName != ''" >
+				and   parent_Node_Name like concat('%', #{parentNodeName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="expireTime != null ">
+			and   expire_time = #{expireTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="priority != null ">
+			and   priority = #{priority,jdbcType=BIGINT}
+			</if>
+			<if test="variable != null and  variable != ''" >
+				and   variable like concat('%', #{variable,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="orderState != null ">
+			and   order_state = #{orderState,jdbcType=BIGINT}
+			</if>
+			<if test="endTime != null ">
+			and   end_time = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+    </select>
+      
+<select id="selectByExample" resultMap="flowOrderHistResult" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_order_hist WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="orderNo != null and  orderNo != ''" >
+				and   ORDER_NO like concat('%', #{orderNo,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="orderVersion != null ">
+			and   ORDER_VERSION = #{orderVersion,jdbcType=BIGINT}
+			</if>
+			<if test="flowProcessId != null ">
+			and   FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT}
+			</if>
+			<if test="parentId != null ">
+			and   PARENT_ID = #{parentId,jdbcType=BIGINT}
+			</if>
+			<if test="parentNodeName != null and  parentNodeName != ''" >
+				and   parent_Node_Name like concat('%', #{parentNodeName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="expireTime != null ">
+			and   expire_time = #{expireTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="priority != null ">
+			and   priority = #{priority,jdbcType=BIGINT}
+			</if>
+			<if test="variable != null and  variable != ''" >
+				and   variable like concat('%', #{variable,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="orderState != null ">
+			and   order_state = #{orderState,jdbcType=BIGINT}
+			</if>
+			<if test="endTime != null ">
+			and   end_time = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+					
+  </select>
+
+<select id="selectByPageExample" resultType="java.util.HashMap" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_order_hist WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="orderNo != null and  orderNo != ''" >
+				and   ORDER_NO like concat('%', #{orderNo,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="orderVersion != null ">
+			and   ORDER_VERSION = #{orderVersion,jdbcType=BIGINT}
+			</if>
+			<if test="flowProcessId != null ">
+			and   FLOW_PROCESS_ID = #{flowProcessId,jdbcType=BIGINT}
+			</if>
+			<if test="parentId != null ">
+			and   PARENT_ID = #{parentId,jdbcType=BIGINT}
+			</if>
+			<if test="parentNodeName != null and  parentNodeName != ''" >
+				and   parent_Node_Name like concat('%', #{parentNodeName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="expireTime != null ">
+			and   expire_time = #{expireTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="priority != null ">
+			and   priority = #{priority,jdbcType=BIGINT}
+			</if>
+			<if test="variable != null and  variable != ''" >
+				and   variable like concat('%', #{variable,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="orderState != null ">
+			and   order_state = #{orderState,jdbcType=BIGINT}
+			</if>
+			<if test="endTime != null ">
+			and   end_time = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+		<if test="sortName!= null and  sortName != ''" >
+			order by ${sortName}  ${sortOrder}
+		</if>
+			
+  </select>
+
+</mapper>

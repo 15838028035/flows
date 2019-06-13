@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.thinkit.cloud.flows.dao.FlowTaskHistMapper">
+    <resultMap id="flowTaskHistResult" type="com.thinkit.cloud.flows.bean.FlowTaskHist">
+   	  	<result property="id" column="id" jdbcType="BIGINT"   />
+   	  	<result property="taskVefrsion" column="TASK_VEFRSION" jdbcType="BIGINT"   />
+   	  	<result property="flowOrderId" column="FLOW_ORDER_ID" jdbcType="BIGINT"   />
+   	  	<result property="taskName" column="TASK_NAME" jdbcType="TIMESTAMP"   />
+   	  	<result property="displayName" column="display_Name" jdbcType="VARCHAR"   />
+   	  	<result property="taskType" column="task_Type" jdbcType="BIGINT"   />
+   	  	<result property="operator" column="operator" jdbcType="VARCHAR"   />
+   	  	<result property="finishTime" column="finish_Time" jdbcType="TIMESTAMP"   />
+   	  	<result property="expireDate" column="expire_Date" jdbcType="TIMESTAMP"   />
+   	  	<result property="remindDate" column="remind_Date" jdbcType="TIMESTAMP"   />
+   	  	<result property="actionUrl" column="action_Url" jdbcType="VARCHAR"   />
+   	  	<result property="parentTaskId" column="parent_Task_Id" jdbcType="BIGINT"   />
+   	  	<result property="variable" column="variable" jdbcType="VARCHAR"   />
+   	  	<result property="createUserId" column="create_user_id" jdbcType="BIGINT"   />
+   	  	<result property="createUserName" column="create_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"   />
+   	  	<result property="updateUserId" column="update_user_id" jdbcType="BIGINT"   />
+   	  	<result property="updateUserName" column="update_user_name" jdbcType="VARCHAR"   />
+   	  	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"   />
+    </resultMap>
+
+	<sql id="Base_Column_List">
+	    <![CDATA[
+	   
+        	id ,
+        	TASK_VEFRSION ,
+        	FLOW_ORDER_ID ,
+        	TASK_NAME ,
+        	display_Name ,
+        	task_Type ,
+        	operator ,
+        	finish_Time ,
+        	expire_Date ,
+        	remind_Date ,
+        	action_Url ,
+        	parent_Task_Id ,
+        	variable ,
+        	create_user_id ,
+        	create_user_name ,
+        	create_time ,
+        	update_user_id ,
+        	update_user_name ,
+        	update_time 
+	    ]]>
+	</sql>
+
+   <select id="selectByPrimaryKey" resultMap="flowTaskHistResult">
+	 select 
+	    <include refid="Base_Column_List"/>
+	    
+	        from flow_task_hist 
+	        where 
+		       id = #{id,jdbcType=BIGINT}
+			
+</select>
+
+ <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+           delete from flow_task_hist where
+        id = #{id,jdbcType=BIGINT}
+	
+       </delete>
+
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO flow_task_hist (
+         id, TASK_VEFRSION, FLOW_ORDER_ID, TASK_NAME, display_Name, task_Type, operator, finish_Time, expire_Date, remind_Date, action_Url, parent_Task_Id, variable, create_user_id, create_user_name, create_time, update_user_id, update_user_name, update_time
+        ) VALUES (
+         #{id,jdbcType=BIGINT}, #{taskVefrsion,jdbcType=BIGINT}, #{flowOrderId,jdbcType=BIGINT}, #{taskName,jdbcType=TIMESTAMP}, #{displayName,jdbcType=VARCHAR}, #{taskType,jdbcType=BIGINT}, #{operator,jdbcType=VARCHAR}, #{finishTime,jdbcType=TIMESTAMP}, #{expireDate,jdbcType=TIMESTAMP}, #{remindDate,jdbcType=TIMESTAMP}, #{actionUrl,jdbcType=VARCHAR}, #{parentTaskId,jdbcType=BIGINT}, #{variable,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateUserName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}        
+        )
+   
+</insert>
+
+ <insert id="insertSelective" parameterType="com.thinkit.cloud.flows.bean.FlowTaskHist">
+          INSERT INTO flow_task_hist 
+	         <trim prefix="(" suffix=")" suffixOverrides="," >
+	    	<if test="id != null" >
+        		id,
+     	 	</if>
+	    	<if test="taskVefrsion != null" >
+        		TASK_VEFRSION,
+     	 	</if>
+	    	<if test="flowOrderId != null" >
+        		FLOW_ORDER_ID,
+     	 	</if>
+	    	<if test="taskName != null" >
+        		TASK_NAME,
+     	 	</if>
+	    	<if test="displayName != null" >
+        		display_Name,
+     	 	</if>
+	    	<if test="taskType != null" >
+        		task_Type,
+     	 	</if>
+	    	<if test="operator != null" >
+        		operator,
+     	 	</if>
+	    	<if test="finishTime != null" >
+        		finish_Time,
+     	 	</if>
+	    	<if test="expireDate != null" >
+        		expire_Date,
+     	 	</if>
+	    	<if test="remindDate != null" >
+        		remind_Date,
+     	 	</if>
+	    	<if test="actionUrl != null" >
+        		action_Url,
+     	 	</if>
+	    	<if test="parentTaskId != null" >
+        		parent_Task_Id,
+     	 	</if>
+	    	<if test="variable != null" >
+        		variable,
+     	 	</if>
+	    	<if test="createUserId != null" >
+        		create_user_id,
+     	 	</if>
+	    	<if test="createUserName != null" >
+        		create_user_name,
+     	 	</if>
+	    	<if test="createTime != null" >
+        		create_time,
+     	 	</if>
+	    	<if test="updateUserId != null" >
+        		update_user_id,
+     	 	</if>
+	    	<if test="updateUserName != null" >
+        		update_user_name,
+     	 	</if>
+	    	<if test="updateTime != null" >
+        		update_time,
+     	 	</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+
+	    		<if test="id != null" >
+        		     #{id,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="taskVefrsion != null" >
+        		     #{taskVefrsion,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="flowOrderId != null" >
+        		     #{flowOrderId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="taskName != null" >
+        		     #{taskName,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="displayName != null" >
+        		     #{displayName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="taskType != null" >
+        		     #{taskType,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="operator != null" >
+        		     #{operator,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="finishTime != null" >
+        		     #{finishTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="expireDate != null" >
+        		     #{expireDate,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="remindDate != null" >
+        		     #{remindDate,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="actionUrl != null" >
+        		     #{actionUrl,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="parentTaskId != null" >
+        		     #{parentTaskId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="variable != null" >
+        		     #{variable,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="createUserId != null" >
+        		     #{createUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="createUserName != null" >
+        		     #{createUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="createTime != null" >
+        		     #{createTime,jdbcType=TIMESTAMP},
+     	 		</if>
+	    		<if test="updateUserId != null" >
+        		     #{updateUserId,jdbcType=BIGINT},
+     	 		</if>
+	    		<if test="updateUserName != null" >
+        		     #{updateUserName,jdbcType=VARCHAR},
+     	 		</if>
+	    		<if test="updateTime != null" >
+        		     #{updateTime,jdbcType=TIMESTAMP},
+     	 		</if>
+		</trim>
+ </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.thinkit.cloud.flows.bean.FlowTaskHist">
+    
+        UPDATE flow_task_hist 
+     
+      <set >
+				<if test="taskVefrsion != null ">
+				TASK_VEFRSION = #{taskVefrsion,jdbcType=BIGINT} ,
+				</if>
+				<if test="flowOrderId != null ">
+				FLOW_ORDER_ID = #{flowOrderId,jdbcType=BIGINT} ,
+				</if>
+				<if test="taskName != null ">
+				TASK_NAME = #{taskName,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="displayName != null and  displayName != ''" >
+				display_Name = #{displayName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="taskType != null ">
+				task_Type = #{taskType,jdbcType=BIGINT} ,
+				</if>
+				<if test="operator != null and  operator != ''" >
+				operator = #{operator,jdbcType=VARCHAR} ,
+				</if>
+				<if test="finishTime != null ">
+				finish_Time = #{finishTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="expireDate != null ">
+				expire_Date = #{expireDate,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="remindDate != null ">
+				remind_Date = #{remindDate,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="actionUrl != null and  actionUrl != ''" >
+				action_Url = #{actionUrl,jdbcType=VARCHAR} ,
+				</if>
+				<if test="parentTaskId != null ">
+				parent_Task_Id = #{parentTaskId,jdbcType=BIGINT} ,
+				</if>
+				<if test="variable != null and  variable != ''" >
+				variable = #{variable,jdbcType=VARCHAR} ,
+				</if>
+				<if test="createUserId != null ">
+				create_user_id = #{createUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="createUserName != null and  createUserName != ''" >
+				create_user_name = #{createUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="createTime != null ">
+				create_time = #{createTime,jdbcType=TIMESTAMP} ,
+				</if>
+				<if test="updateUserId != null ">
+				update_user_id = #{updateUserId,jdbcType=BIGINT} ,
+				</if>
+				<if test="updateUserName != null and  updateUserName != ''" >
+				update_user_name = #{updateUserName,jdbcType=VARCHAR} ,
+				</if>
+				<if test="updateTime != null ">
+				update_time = #{updateTime,jdbcType=TIMESTAMP} ,
+				</if>
+
+	 </set>
+        WHERE 
+	        id = #{id,jdbcType=BIGINT}
+		
+    </update>
+   
+    <update id="updateByPrimaryKey" >
+
+        UPDATE flow_task_hist SET
+	        TASK_VEFRSION = #{taskVefrsion} , FLOW_ORDER_ID = #{flowOrderId} , TASK_NAME = #{taskName} , display_Name = #{displayName} , task_Type = #{taskType} , operator = #{operator} , finish_Time = #{finishTime} , expire_Date = #{expireDate} , remind_Date = #{remindDate} , action_Url = #{actionUrl}  , parent_Task_Id = #{parentTaskId} , variable = #{variable} , create_user_id = #{createUserId} , create_user_name = #{createUserName} , create_time = #{createTime} , update_user_id = #{updateUserId} , update_user_name = #{updateUserName} , update_time = #{updateTime}  
+        WHERE 
+		id = #{id,jdbcType=BIGINT}
+		 
+  
+</update>
+    
+    <select id="select" resultMap="flowTaskHistResult">
+	 select 
+    	<include refid="Base_Column_List"/>
+	   
+	        from flow_task_hist WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="taskVefrsion != null ">
+			and   TASK_VEFRSION = #{taskVefrsion,jdbcType=BIGINT}
+			</if>
+			<if test="flowOrderId != null ">
+			and   FLOW_ORDER_ID = #{flowOrderId,jdbcType=BIGINT}
+			</if>
+			<if test="taskName != null ">
+			and   TASK_NAME = #{taskName,jdbcType=TIMESTAMP}
+			</if>
+			<if test="displayName != null and  displayName != ''" >
+				and   display_Name like concat('%', #{displayName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="taskType != null ">
+			and   task_Type = #{taskType,jdbcType=BIGINT}
+			</if>
+			<if test="operator != null and  operator != ''" >
+				and   operator like concat('%', #{operator,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="finishTime != null ">
+			and   finish_Time = #{finishTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="expireDate != null ">
+			and   expire_Date = #{expireDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remindDate != null ">
+			and   remind_Date = #{remindDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actionUrl != null and  actionUrl != ''" >
+				and   action_Url like concat('%', #{actionUrl,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="parentTaskId != null ">
+			and   parent_Task_Id = #{parentTaskId,jdbcType=BIGINT}
+			</if>
+			<if test="variable != null and  variable != ''" >
+				and   variable like concat('%', #{variable,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+    </select>
+      
+<select id="selectByExample" resultMap="flowTaskHistResult" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_task_hist WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="taskVefrsion != null ">
+			and   TASK_VEFRSION = #{taskVefrsion,jdbcType=BIGINT}
+			</if>
+			<if test="flowOrderId != null ">
+			and   FLOW_ORDER_ID = #{flowOrderId,jdbcType=BIGINT}
+			</if>
+			<if test="taskName != null ">
+			and   TASK_NAME = #{taskName,jdbcType=TIMESTAMP}
+			</if>
+			<if test="displayName != null and  displayName != ''" >
+				and   display_Name like concat('%', #{displayName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="taskType != null ">
+			and   task_Type = #{taskType,jdbcType=BIGINT}
+			</if>
+			<if test="operator != null and  operator != ''" >
+				and   operator like concat('%', #{operator,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="finishTime != null ">
+			and   finish_Time = #{finishTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="expireDate != null ">
+			and   expire_Date = #{expireDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remindDate != null ">
+			and   remind_Date = #{remindDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actionUrl != null and  actionUrl != ''" >
+				and   action_Url like concat('%', #{actionUrl,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="parentTaskId != null ">
+			and   parent_Task_Id = #{parentTaskId,jdbcType=BIGINT}
+			</if>
+			<if test="variable != null and  variable != ''" >
+				and   variable like concat('%', #{variable,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+					
+  </select>
+
+<select id="selectByPageExample" resultType="java.util.HashMap" >
+	 select 
+		<include refid="Base_Column_List"/>
+   	       	   from flow_task_hist WHERE 1=1  
+	  
+			<if test="id != null ">
+			and   id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="taskVefrsion != null ">
+			and   TASK_VEFRSION = #{taskVefrsion,jdbcType=BIGINT}
+			</if>
+			<if test="flowOrderId != null ">
+			and   FLOW_ORDER_ID = #{flowOrderId,jdbcType=BIGINT}
+			</if>
+			<if test="taskName != null ">
+			and   TASK_NAME = #{taskName,jdbcType=TIMESTAMP}
+			</if>
+			<if test="displayName != null and  displayName != ''" >
+				and   display_Name like concat('%', #{displayName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="taskType != null ">
+			and   task_Type = #{taskType,jdbcType=BIGINT}
+			</if>
+			<if test="operator != null and  operator != ''" >
+				and   operator like concat('%', #{operator,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="finishTime != null ">
+			and   finish_Time = #{finishTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="expireDate != null ">
+			and   expire_Date = #{expireDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remindDate != null ">
+			and   remind_Date = #{remindDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actionUrl != null and  actionUrl != ''" >
+				and   action_Url like concat('%', #{actionUrl,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="parentTaskId != null ">
+			and   parent_Task_Id = #{parentTaskId,jdbcType=BIGINT}
+			</if>
+			<if test="variable != null and  variable != ''" >
+				and   variable like concat('%', #{variable,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createUserId != null ">
+			and   create_user_id = #{createUserId,jdbcType=BIGINT}
+			</if>
+			<if test="createUserName != null and  createUserName != ''" >
+				and   create_user_name like concat('%', #{createUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="createTime != null ">
+			and   create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateUserId != null ">
+			and   update_user_id = #{updateUserId,jdbcType=BIGINT}
+			</if>
+			<if test="updateUserName != null and  updateUserName != ''" >
+				and   update_user_name like concat('%', #{updateUserName,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="updateTime != null ">
+			and   update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		
+		<if test="sortName!= null and  sortName != ''" >
+			order by ${sortName}  ${sortOrder}
+		</if>
+			
+  </select>
+
+</mapper>

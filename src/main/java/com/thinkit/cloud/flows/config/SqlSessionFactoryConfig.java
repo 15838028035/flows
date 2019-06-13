@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.thinkit.cloud.upm.dao")
+@MapperScan("com.thinkit.cloud.flows.dao")
 public class SqlSessionFactoryConfig implements TransactionManagementConfigurer {
 
     @Autowired
